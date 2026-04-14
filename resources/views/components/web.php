@@ -33,14 +33,11 @@ Route::get('/recipe', function(){
 
 
 Route::get('/master-data/kategori', [AdminKategoriController::class, 'index']);
-Route::get('/master-data/kategori/create', [AdminKategoriController::class, 'create'])-> name('admin.kategori.create');
 
 Route::get('/master-data/user', [AdminUserController::class, 'index']);
-Route::get('/master-data/user/create', [AdminUserController::class, 'create'])-> name('admin.user.create');
 
 Route::get('/resep-menu', [AdminMenuController::class, 'index']);
-Route::get('/resep-menu/create', [AdminMenuController::class, 'create'])-> name('admin.menu.create');
-Route::get('/resep-menu/detail', [AdminMenuController::class, 'detail'])-> name('admin.menu.detail');
+
 
 // Dashboard
 Route::get('/dashboard-general-dashboard', function () {

@@ -22,6 +22,23 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item dropdown {{ $type_menu === 'master-data' ? 'active' : '' }}">
+                <a href="#"
+                    class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Master Data</span></a>
+                <ul class="dropdown-menu">
+                    <li class='{{ Request::is('master-data/kategori') ? 'active' : '' }}'>
+                        <a class="nav-link"
+                            href="{{ url('master-data/kategori') }}">Kategori</a>
+                    </li>
+                    <li class="{{ Request::is('master-data/user') ? 'active' : '' }}">
+                        <a class="nav-link"
+                            href="{{ url('master-data/user') }}">User</a>
+                    </li>
+                </ul>
+            </li>   
+            <li class="{{ Request::is('resep-menu') ? 'active' : '' }}">
+                <a class="nav-link"href="{{ url('resep-menu') }}"><i class="far fa-square"></i> <span>Menu Resep</span></a>
+            </li>
             <li class="menu-header">Starter</li>
             <li class="nav-item dropdown {{ $type_menu === 'layout' ? 'active' : '' }}">
                 <a href="#"
