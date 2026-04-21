@@ -15,14 +15,15 @@
             <div class="section-body">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Tambah Kategori</h4>
+                        <h4>Edit Kategori</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('admin.kategori.create.proses') }}" method="POST">
+                        <form action="{{ route('admin.kategori.edit.proses') }}" method="POST">
                             @csrf
+                            <input value="{{ $kategori -> id }}" hidden name="id"/>
                             <div class="form-group">
                                 <label>Nama Kategori</label>
-                                <input type="text" class="form-control" name="nama" required>
+                                <input type="text" class="form-control" name="nama" required value="{{ $kategori -> nama }}">
                             </div>
                             <div class="form-group">
                                 <div class="justify-content-end d-flex ">

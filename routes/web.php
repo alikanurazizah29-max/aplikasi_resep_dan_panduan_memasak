@@ -32,8 +32,12 @@ Route::get('/recipe', function(){
 });
 
 
-Route::get('/master-data/kategori', [AdminKategoriController::class, 'index']);
+Route::get('/master-data/kategori', [AdminKategoriController::class, 'index'])-> name ('admin.kategori');
 Route::get('/master-data/kategori/create', [AdminKategoriController::class, 'create'])-> name('admin.kategori.create');
+Route::post('/master-data/kategori/create', [AdminKategoriController::class, 'proses_create'])-> name('admin.kategori.create.proses');
+Route::get('/master-data/kategori/edit/{id}', [AdminKategoriController::class, 'edit'])-> name('admin.kategori.edit');
+Route::post('/master-data/kategori/edit', [AdminKategoriController::class, 'proses_edit'])-> name('admin.kategori.edit.proses');
+Route::delete('/master-data/kategori/{id}', [AdminKategoriController::class, 'delete'])-> name('admin.kategori.delete');
 
 Route::get('/master-data/user', [AdminUserController::class, 'index']);
 Route::get('/master-data/user/create', [AdminUserController::class, 'create'])-> name('admin.user.create');
