@@ -15,14 +15,15 @@
             <div class="section-body">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Tambah User</h4>
+                        <h4>Edit User</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('admin.user.create.proses') }}" method="POST">
+                        <form action="{{ route('admin.user.edit.proses') }}" method="POST">
                             @csrf
+                            <input value="{{ $user -> id }}" hidden name="id"/>
                             <div class="form-group">
                                 <label>Nama Lengkap</label>
-                                <input type="text" class="form-control" name="name" required>
+                                <input type="text" class="form-control" name="name" value="{{ $user -> name}}" required>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
@@ -32,7 +33,7 @@
                                             $
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control currency" name='email' required>
+                                    <input type="text" class="form-control currency" name='email' value="{{ $user -> email}}" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -43,7 +44,7 @@
                                             <i class="fas fa-lock"></i>
                                         </div>
                                     </div>
-                                    <input type="password" class="form-control pwstrength" data-indicator="pwindicator" name='password' required>
+                                    <input type="password" class="form-control pwstrength" data-indicator="pwindicator" name='password' value="{{ $user -> password}}" required>
                                 </div>
                                 <div id="pwindicator" class="pwindicator">
                                     <div class="bar"></div>
@@ -57,7 +58,7 @@
                                     </button>
                                 </div>
                             </div>
-                     </form>
+                        </form>
                     </div>
                 </div>
         </section>

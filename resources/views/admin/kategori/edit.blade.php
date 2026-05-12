@@ -18,7 +18,7 @@
                         <h4>Edit Kategori</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('admin.kategori.edit.proses') }}" method="POST">
+                        <form action="{{ route('admin.kategori.edit.proses', $kategori->id) }}" method="POST">
                             @csrf
                             <input value="{{ $kategori -> id }}" hidden name="id"/>
                             <div class="form-group">

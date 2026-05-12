@@ -6,7 +6,8 @@
     <!-- CSS Libraries -->
 @endpush
 
-@section('main')<div class="main-content">
+@section('main')
+    <div class="main-content">
         <section class="section">
             <div class="section-header">
                 <h1>Blank Page</h1>
@@ -19,7 +20,7 @@
                             <input class="form-control" type="search" placeholder="Search" aria-label="Search"
                                 data-width="250">
                             <button class="btn btn-primary mr-2" type="submit"><i class="fas fa-search"></i></button>
-                            <a href="{{ route('admin.menu.create') }}" class="btn btn-primary btn-icon icon-left">
+                            <a href="{{ route('admin.resep.create') }}" class="btn btn-primary btn-icon icon-left">
                                 <i class="fa-solid fa-plus"></i> Tambahkan
                             </a>
                         </div>
@@ -37,26 +38,28 @@
                                         <th>Updated At</th>
                                         <th>Action</th>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Irwansyah Saputra</td>
-                                        <td>Irwansyah Saputra</td>
-                                        <td>Irwansyah Saputra</td>
-                                        <td>Irwansyah Saputra</td>
-                                        <td>Irwansyah Saputra</td>
-                                        <td>2017-01-09</td>
-                                        <td>
-                                            <div class="badge badge-success">Active</div>
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('admin.menu.detail') }}" class="btn btn-primary">Detail</a>
-                                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip"
-                                                title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete"
-                                                data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?"
-                                                data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
+                                    @foreach ($data_resep as $resep)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $resep->name }}</td>
+                                            <td>{{ $resep->gambar }}</td>
+                                            <td>{{ $resep->porsi }}</td>
+                                            <td>{{ $resep->deskripsi }}</td>
+                                            <td>{{ $resep->kategori }}</td>
+                                            <td>
+                                                <div class="badge badge-success">Active</div>
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('admin.resep.detail') }}"
+                                                    class="btn btn-primary">Detail</a>
+                                                <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip"
+                                                    title="Edit"><i class="fas fa-pencil-alt"></i></a>
+                                                <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete"
+                                                    data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?"
+                                                    data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </table>
                             </div>
                         </div>
@@ -82,6 +85,7 @@
                     </div>
                 </div>
             </div>
+
         </section>
     </div>
 @endsection

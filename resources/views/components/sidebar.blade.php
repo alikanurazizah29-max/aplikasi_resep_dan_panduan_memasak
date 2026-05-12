@@ -36,8 +36,8 @@
                     </li>
                 </ul>
             </li>   
-            <li class="{{ Request::is('resep-menu') ? 'active' : '' }}">
-                <a class="nav-link"href="{{ url('resep-menu') }}"><i class="far fa-square"></i> <span>Menu Resep</span></a>
+            <li class="{{ Request::is('resep') ? 'active' : '' }}">
+                <a class="nav-link"href="{{ url('resep') }}"><i class="far fa-square"></i> <span>Resep</span></a>
             </li>
             <li class="menu-header">Starter</li>
             <li class="nav-item dropdown {{ $type_menu === 'layout' ? 'active' : '' }}">

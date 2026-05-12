@@ -30,28 +30,36 @@
                                         <th>No</th>
                                         <th>Name</th>
                                         <th>Email</th>
-                                        <th>Password</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
                                         <th>Action</th>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Irwansyah Saputra</td>
-                                        <td>Irwansyah Saputra</td>
-                                        <td>Irwansyah Saputra</td>
-                                        <td>2017-01-09</td>
-                                        <td>
-                                            <div class="badge badge-success">Active</div>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip"
-                                                title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete"
-                                                data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?"
-                                                data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
+                                    @foreach ($data_user as $user)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $user->name }}</td>
+                                            <td>{{ $user->email }}</td>
+                                            <td>
+                                                <div class="badge badge-success">Active</div>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip"
+                                                    title="Edit" href="{{ route('admin.user.edit', $user->id) }}">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </a>
+                                                <form action="{{ route('admin.user.delete', $user->id) }}"
+                                                    method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+
+                                                    <button type="submit" class="btn btn-danger btn-action"
+                                                        onclick="return confirm('Yakin mau hapus?')">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </table>
                             </div>
                         </div>

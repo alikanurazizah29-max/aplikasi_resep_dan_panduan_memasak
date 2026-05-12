@@ -1,10 +1,9 @@
 <?php
 
-use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\AdminKategoriController;
 use App\Http\Controllers\AdminMenuController;
+use App\Http\Controllers\AdminResepController;
 use App\Http\Controllers\AdminUserController;
-use App\Http\Controllers\CerpenController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -32,19 +31,27 @@ Route::get('/recipe', function(){
 });
 
 
-Route::get('/master-data/kategori', [AdminKategoriController::class, 'index'])-> name ('admin.kategori');
+Route::get('/master-data/kategori', [AdminKategoriController::class, 'index'])-> name('admin.kategori');
 Route::get('/master-data/kategori/create', [AdminKategoriController::class, 'create'])-> name('admin.kategori.create');
 Route::post('/master-data/kategori/create', [AdminKategoriController::class, 'proses_create'])-> name('admin.kategori.create.proses');
 Route::get('/master-data/kategori/edit/{id}', [AdminKategoriController::class, 'edit'])-> name('admin.kategori.edit');
 Route::post('/master-data/kategori/edit', [AdminKategoriController::class, 'proses_edit'])-> name('admin.kategori.edit.proses');
 Route::delete('/master-data/kategori/{id}', [AdminKategoriController::class, 'delete'])-> name('admin.kategori.delete');
 
-Route::get('/master-data/user', [AdminUserController::class, 'index']);
+Route::get('/master-data/user', [AdminUserController::class, 'index'])-> name('admin.user');
 Route::get('/master-data/user/create', [AdminUserController::class, 'create'])-> name('admin.user.create');
+Route::post('/master-data/user/create', [AdminUserController::class, 'proses_create'])-> name('admin.user.create.proses');
+Route::get('master-data/user/edit/{id}', [AdminUserController::class, 'edit'])-> name('admin.user.edit');
+Route::post('/master-data/user/edit', [AdminUserController::class, 'proses_edit'])-> name('admin.user.edit.proses');
+Route::delete('/master-data/user/{id}', [AdminUserController::class, 'delete'])-> name('admin.user.delete');
 
-Route::get('/resep-menu', [AdminMenuController::class, 'index']);
-Route::get('/resep-menu/create', [AdminMenuController::class, 'create'])-> name('admin.menu.create');
-Route::get('/resep-menu/detail', [AdminMenuController::class, 'detail'])-> name('admin.menu.detail');
+Route::get('/resep', [AdminResepController::class, 'index'])-> name('admin.resep');
+Route::get('/resep/create', [AdminResepController::class, 'create'])-> name('admin.resep.create');
+Route::post('/resep/create', [AdminResepController::class, 'proses_create'])-> name('admin.resep.create.proses');
+Route::get('/resep/edit/{id}', [AdminResepController::class, 'edit'])-> name('admin.resep.edit');
+Route::post('/resep/edit', [AdminResepController::class, 'proses_edit'])-> name('admin.resep.edit.proses');
+Route::delete('/resep/{id}', [AdminResepController::class, 'delete'])-> name('admin.resep.delete');
+Route::get('/resep/detail', [AdminResepController::class, 'detail'])-> name('admin.resep.detail');
 
 // Dashboard
 Route::get('/dashboard-general-dashboard', function () {

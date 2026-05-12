@@ -11,7 +11,7 @@ class AdminKategoriController extends Controller
 {
     public function index()
     {
-        $data_kategori=kategori::all();
+        $data_kategori=Kategori::all();
         return view('admin.kategori.index',[
             'type_menu' => 'master-data',
             'data_kategori'=> $data_kategori
@@ -31,13 +31,13 @@ class AdminKategoriController extends Controller
                 'nama' => 'required'
             ]);
 
-            kategori::create($request -> all());
+            Kategori::create($request -> all());
             return redirect()-> route('admin.kategori');
         }
 
     public function edit($id)
     {
-        $kategori=kategori::find($id);
+        $kategori=Kategori::find($id, 'id');
 
         return view('admin.kategori.edit',[
                 'type_menu' => 'master-data',
@@ -52,7 +52,7 @@ class AdminKategoriController extends Controller
           'nama' => 'required'
          ]);
 
-         $kategori=kategori::find($request-> id);
+         $kategori=Kategori::find($request-> id, 'id');
 
          $kategori -> nama= $request-> nama;
          $kategori -> updated_at = now();
@@ -62,7 +62,7 @@ class AdminKategoriController extends Controller
 
     public function delete($id)
     {
-        $kategori=kategori::find($id);
+        $kategori=Kategori::find($id, 'id');
 
         $kategori->delete();
         return redirect()-> route('admin.kategori');
