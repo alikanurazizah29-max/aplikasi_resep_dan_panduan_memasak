@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class resep extends Model
+class Resep extends Model
 {
     protected $fillable = ['nama', 'gambar', 'porsi', 'deskripsi', 'kategori_id'];
 

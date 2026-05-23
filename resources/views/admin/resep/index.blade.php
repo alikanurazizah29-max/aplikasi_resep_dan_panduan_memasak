@@ -41,22 +41,33 @@
                                     @foreach ($data_resep as $resep)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $resep->name }}</td>
-                                            <td>{{ $resep->gambar }}</td>
+                                            <td>{{ $resep->nama }}</td>
+                                            <td><img style="height: 100px" src="{{ asset('storage/' . $resep->gambar) }}" alt=""></td>
                                             <td>{{ $resep->porsi }}</td>
                                             <td>{{ $resep->deskripsi }}</td>
-                                            <td>{{ $resep->kategori }}</td>
+                                            <td>{{ $resep->kategori->nama }}</td>
                                             <td>
                                                 <div class="badge badge-success">Active</div>
                                             </td>
                                             <td>
                                                 <a href="{{ route('admin.resep.detail') }}"
                                                     class="btn btn-primary">Detail</a>
+
                                                 <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip"
-                                                    title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                                                <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete"
-                                                    data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?"
-                                                    data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
+                                                    title="Edit" href="{{ route('admin.resep.edit', $resep->id) }}">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </a>
+
+                                                <form action="{{ route('admin.resep.delete', $resep->id) }}" method="POST"
+                                                    style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+
+                                                    <button type="submit" class="btn btn-danger btn-action"
+                                                        onclick="return confirm('Yakin mau hapus?')">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach

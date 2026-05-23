@@ -37,7 +37,7 @@ class AdminKategoriController extends Controller
 
     public function edit($id)
     {
-        $kategori=Kategori::find($id, 'id');
+        $kategori=Kategori::findOrFail($id);
 
         return view('admin.kategori.edit',[
                 'type_menu' => 'master-data',
@@ -52,7 +52,7 @@ class AdminKategoriController extends Controller
           'nama' => 'required'
          ]);
 
-         $kategori=Kategori::find($request-> id, 'id');
+         $kategori=Kategori::findOrFail($request-> id);
 
          $kategori -> nama= $request-> nama;
          $kategori -> updated_at = now();
@@ -62,7 +62,7 @@ class AdminKategoriController extends Controller
 
     public function delete($id)
     {
-        $kategori=Kategori::find($id, 'id');
+        $kategori=Kategori::findOrFail($id);
 
         $kategori->delete();
         return redirect()-> route('admin.kategori');

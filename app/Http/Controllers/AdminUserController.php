@@ -38,7 +38,7 @@ class AdminUserController extends Controller
 
         public function edit($id)
         {
-            $user=User::find($id, 'id');
+            $user=User::findOrFail($id);
 
             return view('admin.user.edit',[
                 'type_menu' => 'master-data',
@@ -54,7 +54,7 @@ class AdminUserController extends Controller
             'password' => 'required'
             ]);
 
-            $user=User::find($request-> id, 'id');
+            $user=User::findOrFail($request-> id);
 
             $user -> name= $request-> name;
             $user -> email= $request-> email;
@@ -66,7 +66,7 @@ class AdminUserController extends Controller
 
         public function delete($id)
         {
-            $user=User::find($id, 'id');
+            $user=User::findOrFail($id);
 
             $user->delete();
             return redirect()-> route('admin.user');
