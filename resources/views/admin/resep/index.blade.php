@@ -50,7 +50,7 @@
                                                 <div class="badge badge-success">Active</div>
                                             </td>
                                             <td>
-                                                <a href="{{ route('admin.resep.detail') }}"
+                                                <a href="{{ route('admin.resep.detail', $resep->id) }}"
                                                     class="btn btn-primary">Detail</a>
 
                                                 <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip"

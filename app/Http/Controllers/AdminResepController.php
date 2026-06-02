@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\bahan;
 use App\Models\kategori;
+use App\Models\langkah;
 use App\Models\Resep;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -65,10 +67,17 @@ class AdminResepController extends Controller
         ]);
     }
 
-    public function detail()
+    public function detail($resepid)
     {
+        // dd($resepid);
+        $datalangkah = langkah::where('resep_id', $resepid)->get();
+        $databahan = bahan::where('resep_id', $resepid)->get();
+
         return view('admin.resep.detail', [
-            'type_menu' => 'resep-menu',
+            'resepid' => $resepid,
+            'datalangkah' => $datalangkah,
+            'databahan' => $databahan,
+            'type_menu' => 'resep-menu'
         ]);
     }
 

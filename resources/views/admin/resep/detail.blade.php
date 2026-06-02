@@ -19,29 +19,38 @@
                         <div class="card">
                             <div class="card-header justify-content-between d-flex">
                                 <h4>Langkah-langkah</h4>
-                                <a href="#" class="btn btn-icon btn-primary"><i class="fa-solid fa-plus"></i></a>
+                                <a href="{{ route('admin.langkah.create', $resepid) }}" class="btn btn-icon btn-primary"><i
+                                        class="fa-solid fa-plus"></i></a>
                             </div>
                             <div class="card-body">
                                 <ul class="list-group">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    @foreach ($datalangkah as $langkah)
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
 
-                                        <div>
-                                            Cras justo odio
-                                        </div>
+                                            <div>
+                                                {{ $langkah->langkah }}
+                                            </div>
 
-                                        <div>
-                                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit">
-                                                <i class="fas fa-pencil-alt"></i>
-                                            </a>
+                                            <div>
+                                                <a href="{{ route('admin.langkah.edit', $langkah->id) }}"
+                                                    class="btn btn-primary btn-action mr-1" data-toggle="tooltip"
+                                                    title="Edit">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </a>
 
-                                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete"
-                                                data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?"
-                                                data-confirm-yes="alert('Deleted')">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </div>
+                                                <form action="{{ route('admin.langkah.delete', $langkah->id) }}"
+                                                    method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
 
-                                    </li>
+                                                    <button type="submit" class="btn btn-danger btn-action"
+                                                        onclick="return confirm('Yakin mau hapus?')">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -49,30 +58,39 @@
                         <div class="card">
                             <div class="card-header justify-content-between d-flex">
                                 <h4>Bahan bahan</h4>
-                                <a href="#" class="btn btn-icon btn-primary"><i class="fa-solid fa-plus"></i></a>
+                                <a href="{{ route('admin.bahan.create', $resepid) }}" class="btn btn-icon btn-primary"><i class="fa-solid fa-plus"></i></a>
                             </div>
                             <div class="card-body">
                                 <ul class="list-group">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    @foreach ($databahan as $bahan)
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
 
-                                        <div>
-                                            Cras justo odio
-                                            <span class="badge badge-primary badge-pill ml-2">14</span>
-                                        </div>
+                                            <div>
+                                                {{ $bahan -> bahan }}
+                                                <span class="badge badge-primary badge-pill ml-2">{{ $bahan -> jumlah }}</span>
+                                            </div>
 
-                                        <div>
-                                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit">
-                                                <i class="fas fa-pencil-alt"></i>
-                                            </a>
+                                            <div>
+                                                <a href="{{ route('admin.bahan.edit', $bahan->id) }}" 
+                                                    class="btn btn-primary btn-action mr-1" data-toggle="tooltip"
+                                                    title="Edit">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </a>
 
-                                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete"
-                                                data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?"
-                                                data-confirm-yes="alert('Deleted')">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </div>
+                                                <form action="{{ route('admin.bahan.delete', $bahan->id) }}"
+                                                    method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
 
-                                    </li>
+                                                    <button type="submit" class="btn btn-danger btn-action"
+                                                        onclick="return confirm('Yakin mau hapus?')">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
