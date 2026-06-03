@@ -5,15 +5,13 @@ use App\Http\Controllers\AdminLangkahController;
 use App\Http\Controllers\AdminResepController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AdminBahanController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/home', function () {
-    return view('user.index');
-});
+Route::get('/', [HomeController::class, 'index'])->name('user.home');
 
 Route::get('/blog', function () {
     return view('user.blog-post');
@@ -27,9 +25,11 @@ Route::get('/element', function () {
     return view('user.elements');
 });
 
-Route::get('/recipe', function () {
-    return view('user.receipe-post');
-});
+Route::get('/login', [LoginController::class, 'index'])->name('user.login');
+Route::post('/login', [LoginController::class, 'proseslogin'])->name('user.login.proses');
+Route::get('/register', [RegisterController::class, 'index'])->name('user.register');
+
+Route::get('/recipe/{id}', [RecipeController::class, 'detail'])->name('user.resepdetail');
 
 Route::get('/master-data/kategori', [AdminKategoriController::class, 'index'])->name('admin.kategori');
 Route::get('/master-data/kategori/create', [AdminKategoriController::class, 'create'])->name('admin.kategori.create');
@@ -68,7 +68,9 @@ Route::delete('/bahan/{id}', [AdminBahanController::class, 'delete'])->name('adm
 // Dashboard
 Route::get('/dashboard-general-dashboard', function () {
     return view('pages.dashboard-general-dashboard', ['type_menu' => 'dashboard']);
-});
+})->name('dashboard');
+
+
 Route::get('/dashboard-ecommerce-dashboard', function () {
     return view('pages.dashboard-ecommerce-dashboard', ['type_menu' => 'dashboard']);
 });

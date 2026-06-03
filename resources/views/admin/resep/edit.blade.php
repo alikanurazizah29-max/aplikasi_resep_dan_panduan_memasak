@@ -28,7 +28,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Gambar</label>
-                                <input type="file" accept="image/*" class="form-control invoice-input" name="gambar"
+                                <input type="file" accept="image/*" clas    s="form-control invoice-input" name="gambar"
                                     required>
                             </div>
                             <div class="form-group">

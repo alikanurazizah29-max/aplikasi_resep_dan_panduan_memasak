@@ -2,8 +2,38 @@
 @section('title', 'halaman resep')
 @section('content')
 
+    <style>
+        .single-preparation-step p,
+        .custom-control-label {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+
+        .single-preparation-step {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .single-preparation-step p {
+            flex: 1;
+            min-width: 0;
+            /* penting agar teks bisa wrap */
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+
+        .custom-control-label {
+            display: block;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+    </style>
     <!-- ##### Breadcumb Area Start ##### -->
-    <div class="breadcumb-area bg-img bg-overlay" style="background-image: url({{ asset('user/img/bg-img/breadcumb3.jpg') }});">
+    <div class="breadcumb-area bg-img bg-overlay"
+        style="background-image: url({{ asset('user/img/bg-img/breadcumb3.jpg') }});">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
@@ -57,9 +87,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="receipe-slider owl-carousel">
-                        <img src="{{ asset('user/img/bg-img/bg5.jpg') }}" alt="">
-                        <img src="{{ asset('user/img/bg-img/bg5.jpg') }}" alt="">
-                        <img src="{{ asset('user/img/bg-img/bg5.jpg') }}" alt="">
+                        <img src="{{ asset('storage/' . $resep->gambar) }}" alt="">
                     </div>
                 </div>
             </div>
@@ -73,7 +101,7 @@
                     <div class="col-12 col-md-8">
                         <div class="receipe-headline my-5">
                             <span>April 05, 2018</span>
-                            <h2>Vegetarian cheese salad</h2>
+                            <h2>{{ $resep->nama }}</h2>
                             <div class="receipe-duration">
                                 <h6>Prep: 15 mins</h6>
                                 <h6>Cook: 30 mins</h6>
@@ -98,26 +126,13 @@
 
                 <div class="row">
                     <div class="col-12 col-lg-8">
-                        <!-- Single Preparation Step -->
-                        <div class="single-preparation-step d-flex">
-                            <h4>01.</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec varius dui. Suspendisse potenti. Vestibulum ac pellentesque tortor. Aenean congue sed metus in iaculis. Cras a tortor enim. Phasellus posuere vestibulum ipsum, eget lobortis purus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
-                        </div>
-                        <!-- Single Preparation Step -->
-                        <div class="single-preparation-step d-flex">
-                            <h4>02.</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec varius dui. Suspendisse potenti. Vestibulum ac pellentesque tortor. Aenean congue sed metus in iaculis. Cras a tortor enim. Phasellus posuere vestibulum ipsum, eget lobortis purus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
-                        </div>
-                        <!-- Single Preparation Step -->
-                        <div class="single-preparation-step d-flex">
-                            <h4>03.</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec varius dui. Suspendisse potenti. Vestibulum ac pellentesque tortor. Aenean congue sed metus in iaculis. Cras a tortor enim. Phasellus posuere vestibulum ipsum, eget lobortis purus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
-                        </div>
-                        <!-- Single Preparation Step -->
-                        <div class="single-preparation-step d-flex">
-                            <h4>04.</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec varius dui. Suspendisse potenti. Vestibulum ac pellentesque tortor. Aenean congue sed metus in iaculis. Cras a tortor enim. Phasellus posuere vestibulum ipsum, eget lobortis purus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
-                        </div>
+                        @foreach ($datalangkah as $langkah)
+                            <!-- Single Preparation Step -->
+                            <div class="single-preparation-step d-flex">
+                                <h4>{{ $loop->iteration }}</h4>
+                                <p>{{ $langkah->langkah }}</p>
+                            </div>
+                        @endforeach
                     </div>
 
                     <!-- Ingredients -->
@@ -125,53 +140,15 @@
                         <div class="ingredients">
                             <h4>Ingredients</h4>
 
-                            <!-- Custom Checkbox -->
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1">4 Tbsp (57 gr) butter</label>
-                            </div>
-
-                            <!-- Custom Checkbox -->
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                <label class="custom-control-label" for="customCheck2">2 large eggs</label>
-                            </div>
-
-                            <!-- Custom Checkbox -->
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck3">
-                                <label class="custom-control-label" for="customCheck3">2 yogurt containers granulated sugar</label>
-                            </div>
-
-                            <!-- Custom Checkbox -->
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck4">
-                                <label class="custom-control-label" for="customCheck4">1 vanilla or plain yogurt, 170g container</label>
-                            </div>
-
-                            <!-- Custom Checkbox -->
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck5">
-                                <label class="custom-control-label" for="customCheck5">2 yogurt containers unbleached white flour</label>
-                            </div>
-
-                            <!-- Custom Checkbox -->
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck6">
-                                <label class="custom-control-label" for="customCheck6">1.5 yogurt containers milk</label>
-                            </div>
-
-                            <!-- Custom Checkbox -->
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck7">
-                                <label class="custom-control-label" for="customCheck7">1/4 tsp cinnamon</label>
-                            </div>
-
-                            <!-- Custom Checkbox -->
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck8">
-                                <label class="custom-control-label" for="customCheck8">1 cup fresh blueberries </label>
-                            </div>
+                            @foreach ($databahan as $bahan)
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input"
+                                        id="customCheck{{ $loop->iteration }}">
+                                    <label class="custom-control-label" for="customCheck{{ $loop->iteration }}">
+                                        {{ $bahan->bahan }} {{ $bahan->jumlah }}
+                                    </label>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
