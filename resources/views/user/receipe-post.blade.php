@@ -30,6 +30,39 @@
             overflow-wrap: break-word;
             white-space: normal;
         }
+
+        .receipe-headline img {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .step {
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin-top: 20px;
+            font-size: 15px;
+            color: #636363;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 28px;
+            background: #146d40;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 14px;
+            transition: .3s;
+        }
+
+        .btn:hover {
+            background: #a84833;
+        }
     </style>
     <!-- ##### Breadcumb Area Start ##### -->
     <div class="breadcumb-area bg-img bg-overlay"
@@ -55,20 +88,13 @@
                     <div class="row">
                         <div class="col-12 col-lg-3">
                             <select name="select1" id="select1">
-                                <option value="1">All Receipies Categories</option>
-                                <option value="1">All Receipies Categories 2</option>
-                                <option value="1">All Receipies Categories 3</option>
-                                <option value="1">All Receipies Categories 4</option>
-                                <option value="1">All Receipies Categories 5</option>
-                            </select>
-                        </div>
-                        <div class="col-12 col-lg-3">
-                            <select name="select1" id="select2">
-                                <option value="1">All Receipies Categories</option>
-                                <option value="1">All Receipies Categories 2</option>
-                                <option value="1">All Receipies Categories 3</option>
-                                <option value="1">All Receipies Categories 4</option>
-                                <option value="1">All Receipies Categories 5</option>
+                                <select class="form-control" name="kategori_id">
+                                    @foreach ($data_kategori as $kategori)
+                                        <option value="{{ $kategori->id }}">
+                                            {{ $kategori->nama }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </select>
                         </div>
                         <div class="col-12 col-lg-3">
@@ -83,111 +109,91 @@
         </div>
 
         <!-- Receipe Slider -->
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="receipe-slider owl-carousel">
-                        <img src="{{ asset('storage/' . $resep->gambar) }}" alt="">
+        @if (isset($isDetail) && $isDetail)
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="receipe-slider owl-carousel">
+                            <img src="{{ asset('storage/resep/' . $resep->gambar) }}" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endif
 
         <!-- Receipe Content Area -->
         <div class="receipe-content-area">
             <div class="container">
+                @if (isset($isDetail) && $isDetail)
+                    <!-- DETAIL VIEW -->
+                    <div class="receipe-headline my-5">
+                        <img src="{{ asset('storage/' . $resep->gambar) }}" alt="{{ $resep->nama }}" class="img-fluid">
 
-                <div class="row">
-                    <div class="col-12 col-md-8">
-                        <div class="receipe-headline my-5">
-                            <span>April 05, 2018</span>
-                            <h2>{{ $resep->nama }}</h2>
-                            <div class="receipe-duration">
-                                <h6>Prep: 15 mins</h6>
-                                <h6>Cook: 30 mins</h6>
-                                <h6>Yields: 8 Servings</h6>
-                            </div>
+                        <span>April 05, 2018</span>
+                        <h2>{{ $resep->nama }}</h2>
+
+                        <div class="receipe-duration">
+                            <p>{{ $resep->deskripsi }}</p>
                         </div>
                     </div>
+            </div>
+        </div>
 
-                    <div class="col-12 col-md-4">
-                        <div class="receipe-ratings text-right my-5">
-                            <div class="ratings">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                            </div>
-                            <a href="#" class="btn delicious-btn">For Begginers</a>
-                        </div>
+        <div class="row">
+            <div class="col-12 col-lg-4" style="margin-left: 100px">
+                <h4>Steps</h4>
+                @foreach ($datalangkah as $langkah)
+                    <!-- Single Preparation Step -->
+                    <div class="d-flex align-items-start">
+                        <h4 class="mr-3">{{ $loop->iteration }}</h4>
+                        <p class="mb-0">{{ $langkah->langkah }}</p>
                     </div>
-                </div>
+                @endforeach
+            </div>
 
-                <div class="row">
-                    <div class="col-12 col-lg-8">
-                        @foreach ($datalangkah as $langkah)
-                            <!-- Single Preparation Step -->
-                            <div class="single-preparation-step d-flex">
-                                <h4>{{ $loop->iteration }}</h4>
-                                <p>{{ $langkah->langkah }}</p>
-                            </div>
-                        @endforeach
+            <div class="col-12 col-lg-4" style="margin-left: 100px">
+                <h4>Ingredients</h4>
+                @foreach ($databahan as $bahan)
+                    <!-- Single Preparation Step -->
+                    <div class="d-flex flex-col align-items-start">
+                        <ul>
+                            <li>
+                                {{ $bahan->bahan }} {{ $bahan->jumlah }}
+                            </li>
+                        </ul>
                     </div>
-
-                    <!-- Ingredients -->
-                    <div class="col-12 col-lg-4">
-                        <div class="ingredients">
-                            <h4>Ingredients</h4>
-
-                            @foreach ($databahan as $bahan)
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input"
-                                        id="customCheck{{ $loop->iteration }}">
-                                    <label class="custom-control-label" for="customCheck{{ $loop->iteration }}">
-                                        {{ $bahan->bahan }} {{ $bahan->jumlah }}
-                                    </label>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="section-heading text-left">
-                            <h3>Leave a comment</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="contact-form-area">
-                            <form action="#" method="post">
-                                <div class="row">
-                                    <div class="col-12 col-lg-6">
-                                        <input type="text" class="form-control" id="name" placeholder="Name">
-                                    </div>
-                                    <div class="col-12 col-lg-6">
-                                        <input type="email" class="form-control" id="email" placeholder="E-mail">
-                                    </div>
-                                    <div class="col-12">
-                                        <input type="text" class="form-control" id="subject" placeholder="Subject">
-                                    </div>
-                                    <div class="col-12">
-                                        <textarea name="message" class="form-control" id="message" cols="30" rows="10" placeholder="Message"></textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <button class="btn delicious-btn mt-30" type="submit">Post Comments</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                @endforeach
+            </div>
+        </div>
+    @else
+        <!-- LIST VIEW -->
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading">
+                    <h3>All Recipes</h3>
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            @foreach ($resep as $item)
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="single-best-receipe-area mb-30">
+                        <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->nama }}" class="img-fluid">
+                        <div class="card px-2">
+                            <h3><a href="#">
+                                    <h5>{{ $item->nama ?? null }}</h5>
+                                    <p>{{ $item->deskripsi }}</p>
+                                </a></h3>
+                            <a href="{{ route('user.resepdetail', $item->id) }}" class="btn">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        @endif
+    </div>
+    </div>
     </div>
 
     <!-- ##### All Javascript Files ##### -->

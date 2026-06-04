@@ -19,21 +19,23 @@
                         <h4>Tambah Menu</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('admin.resep.edit.proses') }}" method="POST">
+                        <form action="{{ route('admin.resep.edit.proses') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <input value="{{ $resep -> id }}" hidden name="id"/>
+                            <input value="{{ $resep->id }}" hidden name="id" />
                             <div class="form-group">
                                 <label>Nama Resep</label>
-                                <input type="text" class="form-control" name="nama" value="{{ $resep->nama }}" required>
+                                <input type="text" class="form-control" name="nama" value="{{ $resep->nama }}"
+                                    required>
                             </div>
                             <div class="form-group">
                                 <label>Gambar</label>
-                                <input type="file" accept="image/*" clas    s="form-control invoice-input" name="gambar"
+                                <input type="file" accept="image/*" clas s="form-control invoice-input" name="gambar"
                                     required>
                             </div>
                             <div class="form-group">
                                 <label>Porsi</label>
-                                <input type="text" class="form-control invoice-input" name="porsi" value=" {{ $resep->porsi }}" required>
+                                <input type="text" class="form-control invoice-input" name="porsi"
+                                    value=" {{ $resep->porsi }}" required>
                             </div>
                             <div class="form-group">
                                 <label>Deskripsi</label>
@@ -43,9 +45,8 @@
                                 <label>Kategori</label>
                                 <select class="form-control" name="kategori_id" required>
                                     @foreach ($data_kategori as $kategori)
-                                        <option @if ( $resep->kategori_id==$kategori->id)
-                                            selected 
-                                        @endif value="{{ $kategori->id }}">{{$kategori->nama}}</option>
+                                        <option @if ($resep->kategori_id == $kategori->id) selected @endif
+                                            value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
                                     @endforeach
                                 </select>
                                 <div class="form-group">

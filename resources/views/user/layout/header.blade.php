@@ -41,7 +41,7 @@
                    <nav class="classy-navbar justify-content-between" id="deliciousNav">
 
                        <!-- Logo -->
-                       <a class="nav-brand" href="index.html"><img src="{{ asset('user/img/core-img/logo.png') }}"
+                       <a class="nav-brand" href="/"><img src="{{ asset('user/img/core-img/logo.png') }}"
                                alt=""></a>
 
                        <!-- Navbar Toggler -->
@@ -60,7 +60,7 @@
                            <!-- Nav Start -->
                            <div class="classynav">
                                <ul>
-                                   <li class="active"><a href="/">Home</a></li>
+                                   {{-- <li class="active"><a href="/">Home</a></li> --}}
                                    {{-- <li><a href="#">Pages</a>
                                        <ul class="dropdown">
                                            <li><a href="index.html">Home</a></li>
@@ -130,15 +130,18 @@
                                            </div>
                                        </div>
                                    </li> --}}
-                                   <li><a href="receipe-post.html">Receipies</a></li>
+                                   {{-- <li><a href="/recipe">Receipies</a></li> --}}
                                    {{-- <li><a href="receipe-post.html">4 Vegans</a></li>
                                    <li><a href="contact.html">Contact</a></li> --}}
+                                   <li class="@if (request()->routeIs('user.home')) active @endif"><a
+                                           href="/">Home</a></li>
+                                   <li class="@if (request()->routeIs('user.resep')) active @endif"><a
+                                           href="/recipe">Receipies</a></li>
                                </ul>
 
                                <!-- Newsletter Form -->
                                <div class="search-btn">
-                                   <a href="{{ route('user.login') }}"><i class="fa fa-sign-in"
-                                           aria-hidden="true"></i></a>
+                                   <a href="{{ route('login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
                                </div>
 
                            </div>

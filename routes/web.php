@@ -25,45 +25,48 @@ Route::get('/element', function () {
     return view('user.elements');
 });
 
-Route::get('/login', [LoginController::class, 'index'])->name('user.login');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'proseslogin'])->name('user.login.proses');
 Route::get('/register', [RegisterController::class, 'index'])->name('user.register');
 
 Route::get('/recipe/{id}', [RecipeController::class, 'detail'])->name('user.resepdetail');
+Route::get('/recipe', [RecipeController::class, 'index'])->name('user.resep');
 
-Route::get('/master-data/kategori', [AdminKategoriController::class, 'index'])->name('admin.kategori');
-Route::get('/master-data/kategori/create', [AdminKategoriController::class, 'create'])->name('admin.kategori.create');
-Route::post('/master-data/kategori/create', [AdminKategoriController::class, 'proses_create'])->name('admin.kategori.create.proses');
-Route::get('/master-data/kategori/edit/{id}', [AdminKategoriController::class, 'edit'])->name('admin.kategori.edit');
-Route::post('/master-data/kategori/edit', [AdminKategoriController::class, 'proses_edit'])->name('admin.kategori.edit.proses');
-Route::delete('/master-data/kategori/{id}', [AdminKategoriController::class, 'delete'])->name('admin.kategori.delete');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/master-data/kategori', [AdminKategoriController::class, 'index'])->name('admin.kategori');
+    Route::get('/master-data/kategori/create', [AdminKategoriController::class, 'create'])->name('admin.kategori.create');
+    Route::post('/master-data/kategori/create', [AdminKategoriController::class, 'proses_create'])->name('admin.kategori.create.proses');
+    Route::get('/master-data/kategori/edit/{id}', [AdminKategoriController::class, 'edit'])->name('admin.kategori.edit');
+    Route::post('/master-data/kategori/edit', [AdminKategoriController::class, 'proses_edit'])->name('admin.kategori.edit.proses');
+    Route::delete('/master-data/kategori/{id}', [AdminKategoriController::class, 'delete'])->name('admin.kategori.delete');
 
-Route::get('/master-data/user', [AdminUserController::class, 'index'])->name('admin.user');
-Route::get('/master-data/user/create', [AdminUserController::class, 'create'])->name('admin.user.create');
-Route::post('/master-data/user/create', [AdminUserController::class, 'proses_create'])->name('admin.user.create.proses');
-Route::get('master-data/user/edit/{id}', [AdminUserController::class, 'edit'])->name('admin.user.edit');
-Route::post('/master-data/user/edit', [AdminUserController::class, 'proses_edit'])->name('admin.user.edit.proses');
-Route::delete('/master-data/user/{id}', [AdminUserController::class, 'delete'])->name('admin.user.delete');
+    Route::get('/master-data/user', [AdminUserController::class, 'index'])->name('admin.user');
+    Route::get('/master-data/user/create', [AdminUserController::class, 'create'])->name('admin.user.create');
+    Route::post('/master-data/user/create', [AdminUserController::class, 'proses_create'])->name('admin.user.create.proses');
+    Route::get('master-data/user/edit/{id}', [AdminUserController::class, 'edit'])->name('admin.user.edit');
+    Route::post('/master-data/user/edit', [AdminUserController::class, 'proses_edit'])->name('admin.user.edit.proses');
+    Route::delete('/master-data/user/{id}', [AdminUserController::class, 'delete'])->name('admin.user.delete');
 
-Route::get('/resep', [AdminResepController::class, 'index'])->name('admin.resep');
-Route::get('/resep/create', [AdminResepController::class, 'create'])->name('admin.resep.create');
-Route::post('/resep/create', [AdminResepController::class, 'proses_create'])->name('admin.resep.create.proses');
-Route::get('/resep/edit/{id}', [AdminResepController::class, 'edit'])->name('admin.resep.edit');
-Route::post('/resep/edit', [AdminResepController::class, 'proses_edit'])->name('admin.resep.edit.proses');
-Route::delete('/resep/{id}', [AdminResepController::class, 'delete'])->name('admin.resep.delete');
-Route::get('/resep/detail/{resepid}', [AdminResepController::class, 'detail'])->name('admin.resep.detail');
+    Route::get('/resep', [AdminResepController::class, 'index'])->name('admin.resep');
+    Route::get('/resep/create', [AdminResepController::class, 'create'])->name('admin.resep.create');
+    Route::post('/resep/create', [AdminResepController::class, 'proses_create'])->name('admin.resep.create.proses');
+    Route::get('/resep/edit/{id}', [AdminResepController::class, 'edit'])->name('admin.resep.edit');
+    Route::post('/resep/edit', [AdminResepController::class, 'proses_edit'])->name('admin.resep.edit.proses');
+    Route::delete('/resep/{id}', [AdminResepController::class, 'delete'])->name('admin.resep.delete');
+    Route::get('/resep/detail/{resepid}', [AdminResepController::class, 'detail'])->name('admin.resep.detail');
 
-Route::get('/langkah/create/{resepid}', [AdminLangkahController::class, 'create'])->name('admin.langkah.create');
-Route::post('/langkah/create', [AdminLangkahController::class, 'proses_create'])->name('admin.langkah.create.proses');
-Route::get('/langkah/edit/{id}', [AdminLangkahController::class, 'edit'])->name('admin.langkah.edit');
-Route::post('/langkah/edit', [AdminLangkahController::class, 'proses_edit'])->name('admin.langkah.edit.proses');
-Route::delete('/langkah/{id}', [AdminLangkahController::class, 'delete'])->name('admin.langkah.delete');
+    Route::get('/langkah/create/{resepid}', [AdminLangkahController::class, 'create'])->name('admin.langkah.create');
+    Route::post('/langkah/create', [AdminLangkahController::class, 'proses_create'])->name('admin.langkah.create.proses');
+    Route::get('/langkah/edit/{id}', [AdminLangkahController::class, 'edit'])->name('admin.langkah.edit');
+    Route::post('/langkah/edit', [AdminLangkahController::class, 'proses_edit'])->name('admin.langkah.edit.proses');
+    Route::delete('/langkah/{id}', [AdminLangkahController::class, 'delete'])->name('admin.langkah.delete');
 
-Route::get('/bahan/create/{resepid}', [AdminBahanController::class, 'create'])->name('admin.bahan.create');
-Route::post('/bahan/create', [AdminBahanController::class, 'proses_create'])->name('admin.bahan.create.proses');
-Route::get('/bahan/edit/{id}', [AdminBahanController::class, 'edit'])->name('admin.bahan.edit');
-Route::post('/bahan/edit', [AdminBahanController::class, 'proses_edit'])->name('admin.bahan.edit.proses');
-Route::delete('/bahan/{id}', [AdminBahanController::class, 'delete'])->name('admin.bahan.delete');
+    Route::get('/bahan/create/{resepid}', [AdminBahanController::class, 'create'])->name('admin.bahan.create');
+    Route::post('/bahan/create', [AdminBahanController::class, 'proses_create'])->name('admin.bahan.create.proses');
+    Route::get('/bahan/edit/{id}', [AdminBahanController::class, 'edit'])->name('admin.bahan.edit');
+    Route::post('/bahan/edit', [AdminBahanController::class, 'proses_edit'])->name('admin.bahan.edit.proses');
+    Route::delete('/bahan/{id}', [AdminBahanController::class, 'delete'])->name('admin.bahan.delete');
+});
 
 // Dashboard
 Route::get('/dashboard-general-dashboard', function () {
